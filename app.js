@@ -14,6 +14,10 @@ app.use(function middleware(req, res, next) {
     next()
 }) 
 
+app.get('/', (req, res) => {
+    console.log("It was called the path: /")
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
