@@ -1,23 +1,20 @@
 // server.js
 const express = require('express');
 const body_parser = require('body-parser');
+const {hash_password,compare_passwords} = require('./hash.js')
+
+
+
 const {create_item, update_password, read_password, read_all_items, delete_password} = require('./crud');
 
-const app = express();
-const port = 3000;
-
-//Middleware
-app.use(express.json())
-
-app.use(body_parser.urlencoded({ extended: false })) //Para poder acceder a los parametros con POST, por medio del req.body[nombre_del-parametro]
+const Router = express.Router();
 
 // Create a new user
-app.post('/users', (req, res) => {
+Router.post('/users', (req, res) => {
   console.log(req.body)
   const user_name = req.body['user_name']
-
-  const password_hash = req.body['password_hash'];
-
+  const password = req.body['password_hash'];
+  const password_hash = hash_password(password)
   console.log(user_name, password_hash)
   create_item(user_name, password_hash, (err, data) => {
     if(err) {
@@ -29,7 +26,7 @@ app.post('/users', (req, res) => {
 });
 
 // Read all users
-app.get('/users', (req, res) => {
+Router.get('/users', (req, res) => {
     read_all_items((err, rows) => {
         if (err) {
             res.status(500).send(err.message)
@@ -40,7 +37,7 @@ app.get('/users', (req, res) => {
 });
 
 // Read a single user by ID
-app.get('/users/:user_name', (req, res) => {
+Router.get('/users/:user_name', (req, res) => {
   const { user_name } = req.params;
   read_password(user_name, (err, rows) => {
     if (err) {
@@ -52,8 +49,9 @@ app.get('/users/:user_name', (req, res) => {
 });
 
 // Update a user by ID
-app.put('/users/:id', (req, res) => {
-  const { user_name, password_hash } = req.body;
+Router.put('/users/:id', (req, res) => {
+  const { user_name, password } = req.body;
+  const password_hash = hash_password(password_hash)
   update_password(user_name, password_hash, user_name, (err) => {
     if (err) {
         res.status(500).send(err.message)
@@ -64,7 +62,7 @@ app.put('/users/:id', (req, res) => {
 });
 
 // Delete a user by ID
-app.delete('/users/:user_name', (req, res) => {
+Router.delete('/users/:user_name', (req, res) => {
   const { user_name } = req.params;
   delete_password(user_name, (err) => {
     if (err) {
@@ -75,6 +73,4 @@ app.delete('/users/:user_name', (req, res) => {
   })
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+module.exports = router;
