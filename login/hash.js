@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
-const dotenv = require('dotenv') //process.env.variable_name
+const dotenv = require('dotenv').config() //process.env.variable_name
  
-const saltRounds = process.env.SALT_ROUND;
+const saltRounds = 10
 
 function hash_password(password_to_hash) {
     let res = bcrypt.hashSync(password_to_hash, saltRounds)
