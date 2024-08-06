@@ -36,8 +36,9 @@ app.use(function middleware(req, res, next) {
     next()
 }) 
 
-app.use(function(req, res) {
+app.use(function(req, res, next) {
 	console.log("URL: " + req.url)
+	next()
   })
 
 //For the login, register, unlogin and change password
@@ -47,6 +48,7 @@ app.use('/unlogin', route_unlogin)
 app.use('/change_password', route_change_password)
 
 app.use((req, res, next) => {
+	console.log("hola mundo")
 	console.log("URL: " + req.url)
 	console.log(req.session)
 	if (req.session.loggedin) {
