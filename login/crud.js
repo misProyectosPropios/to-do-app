@@ -19,7 +19,7 @@ const create_item = (user_name, password_hash, callback) => {
 
 /* 
  * Deletes the row that has the user
- * problem () {
+ * problem delete_password (user: text, callback: function(err)) {
  *  pre-condition: 
  *  pre-condition
  * 
@@ -75,7 +75,7 @@ const update_password = (user, new_password_hash, callback) => {
 
 
 /*
- * problem read_all_items() {
+ * problem read_all_items(callback: function(err, row)) {
  *  pre-condition: 
  *  pre-condition
  * 
@@ -97,7 +97,7 @@ const read_all_items = (callback) => {
 
 
 /*
- * problem () {
+ * problem delete_all_null_users(callback: function(err)) {
  *  pre-condition: 
  *  pre-condition
  * 
