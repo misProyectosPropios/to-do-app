@@ -17,6 +17,16 @@ const create_item = (user_name, password_hash, callback) => {
     })
 }
 
+/* 
+ * Deletes the row that has the user
+ * problem () {
+ *  pre-condition: 
+ *  pre-condition
+ * 
+ *  post-condition:
+ * }
+ */
+
 const delete_password = (user, callback) => {
     const sql= 'DELETE FROM users WHERE user_name=?'
     database.run(sql,  user, function (err) {
@@ -24,13 +34,38 @@ const delete_password = (user, callback) => {
     })
 }
 
+
+/*
+ * Given a user, it returns on the callback the password associated with the user_name or the error that occured
+ * problem read_password(user: text, callback: function (err, password)) {
+ *  pre-condition: 
+ *  pre-condition
+ * 
+ *  post-condition:
+ *  }
+ */
 function read_password (user, callback) {
-    const sql= 'UPDATE users SET user_name=?, password_hash=? WHERE user_name=?'
-    database.all(sql, [user, new_password_hash, user], function (err) {
-        callback(err, {id: this.lastID})
+    const sql= 'SELECT * FROM users WHERE user_name=?'
+    let res 
+    database.get(sql, user, function (err, row) {
+        if (err) {
+            callback(err, null)
+        } else {
+            callback(null, row)
+        }
     })
 }
 
+
+/*
+ * Given a user_name, changes the old password to the new_password_hash
+ * problem update_password(user: text, new_password_hash: text, callback: function(err)) {
+ *  pre-condition: 
+ *  pre-condition
+ * 
+ *  post-condition:
+ * }
+ */
 const update_password = (user, new_password_hash, callback) => {
     const sql= 'UPDATE users SET user_name=?, password_hash=? WHERE user_name=?'
     database.all(sql, [user, new_password_hash, user], function (err) {
@@ -38,6 +73,15 @@ const update_password = (user, new_password_hash, callback) => {
     })
 }
 
+
+/*
+ * problem read_all_items() {
+ *  pre-condition: 
+ *  pre-condition
+ * 
+ *  post-condition:
+ * }
+ */
 const read_all_items = (callback) => {
     const sql= 'SELECT * FROM users'
     let res 
@@ -47,12 +91,19 @@ const read_all_items = (callback) => {
         } else {
             callback(null, row)
         }
-        
     })
-    console.log("El run es: ")
-    console.log(res)
 }
 
+
+
+/*
+ * problem () {
+ *  pre-condition: 
+ *  pre-condition
+ * 
+ *  post-condition:
+ * }
+ */
 const delete_all_null_users = (callback) => {
     const sql= 'DELETE FROM users WHERE user_name=NULL'
     database.run(sql, [], function (err) {
@@ -60,6 +111,7 @@ const delete_all_null_users = (callback) => {
     })
 }
 
+//Exports the functions
 module.exports = {
     create_item,
     read_password,
