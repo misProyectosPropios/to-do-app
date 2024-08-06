@@ -17,7 +17,6 @@ const route_change_password = require('./login/change_password.js')
 const port = process.env.PORT
 const direction = process.env.DIRECTION
 
-var newError = new Error('my error message')
 //Middleware
 app.use(session({
 	secret: process.env.SECRET,
@@ -37,7 +36,7 @@ app.use(function middleware(req, res, next) {
     next()
 }) 
 
-Router.use(function(req, res) {
+app.use(function(req, res) {
 	console.log("URL: " + req.url)
   })
 
