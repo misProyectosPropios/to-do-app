@@ -18,3 +18,5 @@ Router.put('/users/:id', (req, res) => {
       }
     })
   });
+
+module.exports = Router

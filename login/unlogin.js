@@ -5,7 +5,8 @@ const body_parser = require('body-parser');
 
 const Router = express.Router();
 
-Router.get('/', (req, res) => {
+Router.post('/', (req, res) => {
+    console.log("URL: " + req.url)
     req.session.destroy();
     res.send("logout success!");
 })

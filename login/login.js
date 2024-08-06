@@ -14,6 +14,7 @@ const path = "/login"
 //If the user_name exists and the password is correct, returns true
 //If the user_name don't exists or the password is incorrect, returns false
 Router.post('/', (req, res) => {
+  console.log("URL: " + req.url)
   console.log("Se llamo a post /login")
   const user_name = req.body['username']
   const password  = req.body['password'];
@@ -49,6 +50,7 @@ Router.post('/', (req, res) => {
 });
 
 Router.get('/', (req, res) => {
+  console.log("URL: " + req.url)
 	console.log("Se entro en " + path )
 	return res.sendFile(process.env.DIRECTION + "/views/login.html")
 })
