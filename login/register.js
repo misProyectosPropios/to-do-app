@@ -6,6 +6,8 @@ const {create_item} = require('./crud.js');
 
 const Router = express.Router();
 
+const path = "/register"
+
 // Creates a new user, if it doesn't exists already
 Router.post('/', (req, res) => {
     console.log(req.body)
@@ -20,5 +22,10 @@ Router.post('/', (req, res) => {
       }
     })
   });
+
+  Router.get('/', (req, res) => {
+    console.log("Se entro en " + path )
+    res.sendFile(__dirname + "/views/login.html")
+  })
 
   module.exports = Router
