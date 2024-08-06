@@ -1,20 +1,17 @@
-// login.js
+//Librarys
 const express = require('express');
-const body_parser = require('body-parser');
+
+//Imports
 const {compare_passwords} = require('./hash.js')
 const dotenv = require('dotenv').config()
-
-const {read_password, read_all_items} = require('./crud.js');
+const {read_password} = require('./crud.js');
 
 const Router = express.Router();
-
-const path = "/login"
 
 // Read a single user by ID
 //If the user_name exists and the password is correct, returns true
 //If the user_name don't exists or the password is incorrect, returns false
 Router.post('/', (req, res) => {
-  console.log("URL: " + req.url)
   console.log("Se llamo a post /login")
   const user_name = req.body['username']
   const password  = req.body['password'];
@@ -50,8 +47,6 @@ Router.post('/', (req, res) => {
 });
 
 Router.get('/', (req, res) => {
-  console.log("URL: " + req.url)
-	console.log("Se entro en " + path )
 	return res.sendFile(process.env.DIRECTION + "/views/login.html")
 })
 

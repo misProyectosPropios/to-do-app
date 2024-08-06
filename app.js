@@ -37,6 +37,10 @@ app.use(function middleware(req, res, next) {
     next()
 }) 
 
+Router.use(function(req, res) {
+	console.log("URL: " + req.url)
+  })
+
 //For the login, register, unlogin and change password
 app.use('/login', route_login)
 app.use('/register', route_register)

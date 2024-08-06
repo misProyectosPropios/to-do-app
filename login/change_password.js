@@ -1,7 +1,8 @@
+//Librarys
 const express = require('express');
-const body_parser = require('body-parser');
-const {hash_password} = require('./hash.js')
 
+//Imports
+const {hash_password} = require('./hash.js')
 const {update_password} = require('./crud.js');
 
 const Router = express.Router();

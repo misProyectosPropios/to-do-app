@@ -1,13 +1,12 @@
+//Librarys
 const express = require('express');
-const body_parser = require('body-parser');
-//const {compare_passwords} = require('./hash.js')
-
-
 const Router = express.Router();
 
 Router.post('/', (req, res) => {
-    console.log("URL: " + req.url)
-    req.session.destroy();
+    req.session.destroy(function(err) {
+        console.log(err)
+    });
+    
     res.send("logout success!");
 })
 

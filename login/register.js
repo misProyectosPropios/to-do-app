@@ -10,7 +10,6 @@ const path = "/register"
 
 // Creates a new user, if it doesn't exists already
 Router.post('/', (req, res) => {
-    console.log(req.body)
     const user_name = req.body['user_name']
     const password = req.body['password_hash'];
     const password_hash = hash_password(password)
@@ -24,7 +23,6 @@ Router.post('/', (req, res) => {
   });
 
   Router.get('/', (req, res) => {
-    console.log("Se entro en " + path )
     return res.sendFile(process.env.DIRECTION + "/views/login.html")
   })
 
