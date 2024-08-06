@@ -25,7 +25,7 @@ Router.post('/', (req, res) => {
 
   Router.get('/', (req, res) => {
     console.log("Se entro en " + path )
-    res.sendFile(__dirname + "/views/login.html")
+    return res.sendFile(process.env.DIRECTION + "/views/login.html")
   })
 
   module.exports = Router

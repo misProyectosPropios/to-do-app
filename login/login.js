@@ -21,13 +21,24 @@ Router.post('/', (req, res) => {
     if (err) {
       res.status(500).send("AN ERROR OCURRED")
     } else {
+      console.log("No hubo ningún error")
       if (req.session) {
+        console.log("Comparando las contraseñas")
         let is_correct_password = compare_passwords(password, row['password_hash'])
         if (is_correct_password) {
           req.session.loggedin = true;
 			  	req.session.username = user_name;
+          console.log("Authorized")
+          console.log(req.session)
+          req.session.save(function(err) {
+            if (err) {
+              console.error(err)
+            } 
+            
+          })
           res.status(200).status("Welcome back" + user_name + "!")
         } else {
+          console.log("Unauthorized")
           res.status(401).status("User or password incorrect")
         }
       }
@@ -39,7 +50,8 @@ Router.post('/', (req, res) => {
 
 Router.get('/', (req, res) => {
 	console.log("Se entro en " + path )
-  
 	return res.sendFile(process.env.DIRECTION + "/views/login.html")
 })
+
+
 module.exports = Router;
