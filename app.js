@@ -57,8 +57,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/home', function(req, res) {
+	console.log("Estas en /home")
 	res.sendFile(direction + "/views/to-do.html")
-	res.end();
+	//res.end();
 });
 
 app.listen(port, () => {
