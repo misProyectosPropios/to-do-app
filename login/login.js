@@ -9,10 +9,12 @@ const Router = express.Router();
 
 
 // Read a single user by ID
+//If the user_name exists and the password is correct, returns true
+//If the user_name don't exists or the password is incorrect, returns false
 Router.post('/', (req, res) => {
   const user_name = req.body['user_name']
   const password  = req.body['password_hash'];
-  let salida = read_password(user_name, function(err, row) {
+  read_password(user_name, function(err, row) {
     if (err) {
       res.status(500).send("AN ERROR OCURRED")
     } else {

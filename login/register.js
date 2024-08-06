@@ -6,7 +6,7 @@ const {create_item} = require('./crud.js');
 
 const Router = express.Router();
 
-// Create a new user
+// Creates a new user, if it doesn't exists already
 Router.post('/', (req, res) => {
     console.log(req.body)
     const user_name = req.body['user_name']
