@@ -6,9 +6,8 @@ const body_parser = require('body-parser');
 const dotenv = require('dotenv').config()
 const app = express()
 
-
-
 //Routes for middleware
+const route_API = require('./API/router.js')
 const route_login = require('./login/login.js')
 const route_register = require('./login/register.js')
 const route_unlogin = require('./login/unlogin.js')
@@ -47,6 +46,8 @@ app.use('/register', route_register)
 app.use('/unlogin', route_unlogin)
 app.use('/change_password', route_change_password)
 
+app.use('/api', route_API)
+
 app.use((req, res, next) => {
 	console.log("hola mundo")
 	console.log("URL: " + req.url)
@@ -67,10 +68,19 @@ app.get('/', (req, res) => {
 	res.end()
 })
 
+//If the ejecutation came down here, then it's logged	
 app.get('/home', function(req, res) {
-	console.log("URL: " + req.url)
-	res.sendFile(direction + "/views/to-do.html")
-	//res.end();
+	res.redirect('/home/' + req.session.username)
+});
+
+app.get('/home/:username', function(req, res) {
+	if (req.params['username'] === req.session.username) {
+		console.log("URL: " + req.url)
+		res.sendFile(direction + "/views/to-do.html")
+	} else {
+		res.redirect('/home/' + req.session.username)
+	}
+	
 });
 
 app.listen(port, () => {
