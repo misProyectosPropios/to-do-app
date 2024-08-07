@@ -34,8 +34,3 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-
-window.onload = async function() {
-    call_API('/api/get_todos', getParameterByName('username'))
-    document.getElementById(id_to_write_information).innerHTML = 'hola'
-}
