@@ -7,6 +7,7 @@ const dotenv = require('dotenv').config()
 const app = express()
 
 //Routes for middleware
+const route_get_todo = require('./API/get_todos.js')
 const route_API = require('./API/router.js')
 const route_login = require('./login/login.js')
 const route_register = require('./login/register.js')
@@ -47,6 +48,7 @@ app.use('/unlogin', route_unlogin)
 app.use('/change_password', route_change_password)
 
 app.use('/api', route_API)
+app.use('/api', route_get_todo)
 
 app.use((req, res, next) => {
 	console.log("hola mundo")
