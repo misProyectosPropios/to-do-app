@@ -16,8 +16,7 @@ Router.post('/get_todos', async (req, res) => {
     res.json(json)
 })
 
-async function get_todos(req, res) {
-    const {user_name} = req.body
+async function get_todos(user_name, res) {
     return new Promise(function(resolve, reject) {
         read_todo(user_name, function (err, data) {
             if (err !== null) reject(err);
@@ -28,10 +27,10 @@ async function get_todos(req, res) {
                     json[index] = object;
                     index++;
                 });
-                console.log(json)
+                //console.log(json)
                 resolve(json);
             }
         })
     })
 }
-module.exports = Router;
+module.exports = get_todos;

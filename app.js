@@ -6,8 +6,9 @@ const body_parser = require('body-parser');
 const dotenv = require('dotenv').config()
 const app = express()
 
+
 //Routes for middleware
-const route_get_todo = require('./API/get_todos.js')
+const get_todos= require('./API/get_todos.js')
 const route_API = require('./API/router.js')
 const route_login = require('./login/login.js')
 const route_register = require('./login/register.js')
@@ -16,6 +17,8 @@ const route_change_password = require('./login/change_password.js')
 
 const port = process.env.PORT
 const direction = process.env.DIRECTION
+const html_todo_1st = process.env.TODO_HTML_1st
+const html_todo_2nd = process.env.TODO_HTML_2nd
 
 //Middleware
 app.use(session({
@@ -48,7 +51,7 @@ app.use('/unlogin', route_unlogin)
 app.use('/change_password', route_change_password)
 
 app.use('/api', route_API)
-app.use('/api', route_get_todo)
+//app.use('/api', route_get_todo)
 
 app.use((req, res, next) => {
 	console.log("hola mundo")
@@ -75,15 +78,31 @@ app.get('/home', function(req, res) {
 	res.redirect('/home/' + req.session.username)
 });
 
-app.get('/home/:username', function(req, res) {
+app.get('/home/:username', async function(req, res) {
 	if (req.params['username'] === req.session.username) {
 		console.log("URL: " + req.url)
-		res.sendFile(direction + "/views/to-do.html")
+		todos_json = await get_todos(req.params['username'], res)
+		//console.log(todos_json)
+		res.send(html_todo_1st + create_inside_div(todos_json) + html_todo_2nd)
 	} else {
 		res.redirect('/home/' + req.session.username)
 	}
 	
 });
+
+function create_inside_div(json) {
+	let res = ""
+	let keys_list = Object.keys(json)
+	console.log(json)
+	keys_list.sort()
+	keys_list.forEach((key) => {
+		res += "<p>"
+		res += json[key].todo
+		res += "</p>"
+	})
+	console.log()
+	return res
+}
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
