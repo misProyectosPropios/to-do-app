@@ -84,6 +84,7 @@ app.get('/home/:username', async function(req, res) {
 		todos_json = await get_todos(req.params['username'], res)
 		//console.log(todos_json)
 		res.send(html_todo_1st + create_inside_div(todos_json) + html_todo_2nd)
+		//res.sendFile(direction + "/views/to-do.html")
 	} else {
 		res.redirect('/home/' + req.session.username)
 	}
@@ -96,9 +97,9 @@ function create_inside_div(json) {
 	console.log(json)
 	keys_list.sort()
 	keys_list.forEach((key) => {
-		res += "<p>"
+		res += "<textarea rows=1>"
 		res += json[key].todo
-		res += "</p>"
+		res += "</textarea>"
 	})
 	console.log()
 	return res
