@@ -74,8 +74,8 @@ function read_todo (user, callback) {
  * }
  */
 const update_todo= (id, user, todo, state, callback) => {
-    const sql= 'UPDATE to_do SET username=?, todo=?, state=? WHERE user_name=?'
-    database.all(sql, [user, todo, ,ustate], function (err) {
+    const sql= 'UPDATE to_do SET username=?, todo=?, state=? WHERE id=?'
+    database.all(sql, [user, todo, state, id], function (err) {
         callback(err, {id: this.lastID})
     })
 }

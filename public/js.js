@@ -33,3 +33,31 @@ function getParameterByName(name) {
     results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
+function getUsername() {
+    let pathname = location.pathname
+    console.log("Pathmane: " + pathname)
+    return pathname.slice(pathname.lastIndexOf('/') + 1)
+}
+
+async function updateDatabase(id) {
+    alert(id)
+    let username = getUsername()
+    let todo_text = document.getElementById(id).value
+    if (username) {
+        parameters = {
+            "id": id,
+            "user": username,
+            "todo": todo_text,
+            "state": 1,
+        }
+        let info = await call_API('/API/update_row', parameters)
+        console.log(info)
+    }
+    console.log(username)
+
+}
+
+function delete_todo(nodo) {
+    console.log(nodo.parentNode)
+}

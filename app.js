@@ -13,7 +13,8 @@ const route_API = require('./API/router.js')
 const route_login = require('./login/login.js')
 const route_register = require('./login/register.js')
 const route_unlogin = require('./login/unlogin.js')
-const route_change_password = require('./login/change_password.js')
+const route_change_password = require('./login/change_password.js');
+const { compareSync } = require('bcrypt');
 
 const port = process.env.PORT
 const direction = process.env.DIRECTION
@@ -94,14 +95,25 @@ app.get('/home/:username', async function(req, res) {
 function create_inside_div(json) {
 	let res = ""
 	let keys_list = Object.keys(json)
-	console.log(json)
-	keys_list.sort()
+	let id_list = []
 	keys_list.forEach((key) => {
-		res += "<textarea rows=1>"
-		res += json[key].todo
-		res += "</textarea>"
+		id_list.push([])
+		id_list[id_list.length - 1].push(json[key].id)
+		id_list[id_list.length - 1].push(key)
 	})
-	console.log()
+	id_list.sort((a,b) => {
+		return a[0] - b[0]
+	})
+	for(let i = 0; i < id_list.length; i++) {
+		res += "<div class='row'>"
+		res += "<input type='checkbox'>"
+		res += "<textarea class='textarea' rows=1  onchange=updateDatabase(this.id) id=\"" + id_list[i][0] +"\">"
+		//res += "<textarea name='textarea' class='textarea' rows=1  id=\"" + id_list[i][0] +"\">"
+		res += json[id_list[i][1]].todo
+		res += "</textarea>"
+		res += "<button class='close' onClick='delete_todo(this)'/>"
+		res += "</div>"
+	}
 	return res
 }
 

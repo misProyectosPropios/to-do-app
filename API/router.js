@@ -38,6 +38,8 @@ Router.delete('/delete_row', (req, res) => {
 })
 
 Router.post('/update_row', (req, res) => {
+    console.log(req.body)
+    const {id, user, todo, state} = req.body
     update_todo(id, user, todo, state, function(err) {
 
     })

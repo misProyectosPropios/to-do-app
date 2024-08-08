@@ -1,5 +1,11 @@
-::root {
-    --border-radius: 100px;
+:root {
+    --width-button-unlogin: 100px;
+    --border-radius: 10px;
+    --background-container: rgb(75, 75, 110);
+    --bacgkround-scroll-bar: #130631; 
+    --bacgkround-scroll-bar: #130631; 
+    --background-textarea: rgb(119, 113, 151);
+
 }
 
 * {
@@ -20,6 +26,10 @@ body {
     align-items: center;
 }
 
+.header div {
+  width: var( --width-button-unlogin);
+}
+
 .title {
     color: white;
     display: block;
@@ -28,6 +38,7 @@ body {
 
 .button-to-unlog {
     padding: 5px 18px;
+    width: var( --width-button-unlogin);
     color: rgb(212, 212, 212);
     background-color: rgb(36, 33, 54)
 }
@@ -49,8 +60,8 @@ body {
     text-transform: uppercase;
     color: white;
     
-    background: rgb(75, 75, 110);
-    border-radius: 10px;
+    background: var(--background-container);
+    border-radius: var(--border-radius);
   
     &::after {
       position: absolute;
@@ -87,7 +98,7 @@ body {
   .overflow-hidden {
     height: 100%;
     width: 100%;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     overflow: hidden;
   }
   
@@ -100,7 +111,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 9px;
-    background-color: #130631;
+    background-color: var(--background-container);
   }
 
   
@@ -131,14 +142,70 @@ body {
 
   textarea {
     padding: 0;
+    padding: 0 5px;;
     resize: none;
     height: 5%;
-    width: 90%; max-width: 90%
+    width: 90%; max-width: 90%;
+    border: none;
+    outline: none;
+    background-color: var(--background-textarea);
+    border-radius: var(--border-radius);
+
   }
 
-  .textarea {
+  .row {
+    display: flex;
     width: 100%;
-    margin: 0 auto;
+    padding: 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    align-items: center;
+  }
+
+  .row input {
+    padding: 0;
+    margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: red;
   }
 
 
+  .close {
+    overflow: hidden;
+    position: relative;
+    border: none;
+    padding: 0 4px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: transparent;
+    color: #1da1f2;
+    font: inherit;
+    text-indent: 100%;
+    cursor: pointer;
+    
+    &:focus {
+      outline: solid 0 transparent;
+      box-shadow: 0 0 0 2px #8ed0f9
+    }
+    
+    &:hover {
+      background: rgba(29, 161, 142, .1)
+    }
+    
+    &:before, &:after {
+      position: absolute;
+      top: 15%; left: calc(50% - .0625em);
+      width: .125em; height: 70%;
+      border-radius: .125em;
+      transform: rotate(45deg);
+      background: currentcolor;
+      content: ''
+    }
+    
+    &:after { transform: rotate(-45deg); }
+  }
+
+  .close:hover {
+    background-color: rgba(13, 5, 54, 0.5);
+  }
