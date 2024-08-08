@@ -51,7 +51,7 @@ app.use('/register', route_register)
 app.use('/unlogin', route_unlogin)
 app.use('/change_password', route_change_password)
 
-app.use('/api', route_API)
+app.use('/api', route_API) //Moverla a despues de la autorizacion
 //app.use('/api', route_get_todo)
 
 app.use((req, res, next) => {

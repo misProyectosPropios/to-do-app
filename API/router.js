@@ -26,7 +26,7 @@ function delete_all_users_todo(req) {
 
 
 Router.delete('/delete_row', (req, res) => {
-    const {id} = req.body
+    const {id, user_name} = req.body
     delete_todo(id, function (err) {
         if (err) {
             console.error(err)

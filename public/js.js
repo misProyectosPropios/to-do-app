@@ -8,14 +8,14 @@ let id_to_write_information = 'container'
  *  post: returns the value returned from the API called via post method
  * }
  */
-async function call_API(path, parameters) {
+async function call_API(method, path, parameters) {
     let res
     await fetch(path, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-        method: "POST",
+        method: method,
         body: JSON.stringify(parameters)
     })
     .then(response => response.text())
@@ -51,13 +51,25 @@ async function updateDatabase(id) {
             "todo": todo_text,
             "state": 1,
         }
-        let info = await call_API('/API/update_row', parameters)
+        let info = await call_API('POST', '/API/update_row', parameters)
         console.log(info)
     }
     console.log(username)
 
 }
 
-function delete_todo(nodo) {
-    console.log(nodo.parentNode)
+async function delete_todo(nodo) {
+    let parent_div = nodo.parentNode
+    let parent_parent_div = parent_div.parentNode
+    let textarea_id = parent_div.children.item(1).id
+    let username = getUsername()
+    
+    if (username) {
+        parameters = {
+            "user_name": username,
+            "id": textarea_id,
+        }
+        let info = await call_API('DELETE', '/API/delete_row', parameters)
+    }
+    parent_parent_div.removeChild(parent_div)
 }
