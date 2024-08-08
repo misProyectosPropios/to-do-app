@@ -5,6 +5,9 @@
     --bacgkround-scroll-bar: #130631; 
     --bacgkround-scroll-bar: #130631; 
     --background-textarea: rgb(119, 113, 151);
+    --background-textarea-new-todo: rgba(119, 113, 151, 0.40);
+    --background-button: rgba(13, 5, 54, 0.5);
+    --invisble: rgba(0,0,0,0);
 
 }
 
@@ -167,6 +170,8 @@ body {
     margin: 0;
     margin-left: 10px;
     margin-right: 10px;
+    width: 15px;
+    height: 15px;
     background-color: red;
   }
 
@@ -207,5 +212,35 @@ body {
   }
 
   .close:hover {
-    background-color: rgba(13, 5, 54, 0.5);
+    background-color: var(--background-button) ;
   }
+
+  .add-button {
+    padding: 0;
+    margin: 0;
+    margin-left: 8px;
+    margin-right: 8px;
+    width: 17px;
+    height: 17px;
+    background-color: var(--invisible);
+    border: 0;
+    border-radius: 50%;
+  }
+
+  .add-button:hover {
+    background-color: var(--background-button);
+  }
+
+  .new_todo {
+    background-color: var(--background-textarea-new-todo)
+  }
+
+.inv {
+  width: 20px; height: 20px;
+  color: var(--invisible);
+  background-color: var(--invisible);
+  border: 0;
+}
+.inv:hover {
+  background-color: var(--invisible);
+}

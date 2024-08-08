@@ -1,6 +1,10 @@
 let id_to_write_information = 'container'
 
-
+let html_tag_add_todo = '<div class="row">                             \
+            <button class="add-button" onclick="alert("hola mundo")">+</button>                      \
+            <textarea class="new_todo textarea" rows=1/></textarea>     \
+            <div class="inv"></div>\
+    </div>'
 /* 
  * Calls the API and waits till the API returns a value for then return it
  * problem call_API (path: text, paremters: object) {
@@ -72,4 +76,15 @@ async function delete_todo(nodo) {
         let info = await call_API('DELETE', '/API/delete_row', parameters)
     }
     parent_parent_div.removeChild(parent_div)
+}
+
+window.onload = (event) => {
+    console.log(event)
+    add_button_to_create_new_todos()
+}
+
+function add_button_to_create_new_todos() {
+    let todos_container = document.getElementById(id_to_write_information)
+    
+    todos_container.innerHTML += html_tag_add_todo
 }
