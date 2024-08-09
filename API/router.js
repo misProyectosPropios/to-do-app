@@ -9,12 +9,12 @@ const Router = express.Router();
 
 Router.post('/create_todo', (req, res) => {
     const {user_name, todo, state} = req.body
-    create_item(user_name, todo, state, function(err) {
+    create_item(user_name, todo, state, function(err, id) {
         if (err) {
             console.error(err)
             res.status(400).send("Error at the creation of the todo")
         } else {
-            res.status(200).send("Added correctly the todo")
+            res.status(200).send(id.toString())
         }
     })
 })

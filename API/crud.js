@@ -13,7 +13,7 @@ const database = require("./database")
 const create_item = (user_name, todo_text, state, callback) => {
     const sql= 'INSERT INTO to_do (username, todo, state) VALUES (?, ?, ?)'
     database.run(sql, [user_name, todo_text, state], function(err) {
-        callback(err, {id: this.lastID})
+        callback(err, this.lastID)
     })
 }
 

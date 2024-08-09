@@ -2,7 +2,7 @@ let id_to_write_information = 'container'
 
 let html_tag_add_todo = '<div class="row">                             \
             <button class="add-button" onclick="alert("hola mundo")">+</button>                      \
-            <textarea class="new_todo textarea" rows=1/></textarea>     \
+            <textarea class="new_todo" rows=1 onchange="create_new_todo(this.value)"/></textarea>     \
             <div class="inv"></div>\
     </div>'
 /* 
@@ -79,7 +79,6 @@ async function delete_todo(nodo) {
 }
 
 window.onload = (event) => {
-    console.log(event)
     add_button_to_create_new_todos()
 }
 
@@ -87,4 +86,37 @@ function add_button_to_create_new_todos() {
     let todos_container = document.getElementById(id_to_write_information)
     
     todos_container.innerHTML += html_tag_add_todo
+}
+
+async function create_new_todo(todo_text) {
+    console.log(todo_text)
+    let todos_container = document.getElementById(id_to_write_information)
+    let last_children = todos_container.children.item(todos_container.children.length - 1)
+    todos_container.removeChild(last_children)
+    
+    let user_name = getUsername()
+    parameters = {
+        "user_name": user_name,
+        "todo": todo_text,
+        "state": 1,
+    }
+    let id = await call_API("POST", "/API/create_todo", parameters)
+
+    let html = create_new_todo_to_the_view(todo_text, id)
+    console.log(html)
+    todos_container.innerHTML +=  html
+    todos_container.innerHTML += html_tag_add_todo
+    
+}
+
+function create_new_todo_to_the_view(todo_text, id) {
+    let res = ""
+    res += "<div class='row'>"
+	res += "<input type='checkbox'>"
+	res += "<textarea class='textarea' rows=1  onchange=updateDatabase(this.id) id=\"" + id +"\">"
+    res += todo_text
+	res += "</textarea>"
+	res += "<button class='close' onClick='delete_todo(this)'/>"
+	res += "</div>"
+    return res
 }
