@@ -120,3 +120,33 @@ function create_new_todo_to_the_view(todo_text, id) {
 	res += "</div>"
     return res
 }
+
+function change_state(node) {
+    modify_state_text_area_decoration(node)
+}
+
+function modify_state_text_area_decoration(node) {
+    let nodeParent = node.parentNode
+    let textarea = nodeParent.children.item(1)
+    let new_text = document.createElement("p")
+    new_text.innerHTML = textarea.value
+
+    let newDiv = document.createElement('div')
+    newDiv.className = 'row'
+
+    newDiv.appendChild(node)
+    newDiv.appendChild(new_text)
+
+    console.log(textarea.value)
+    //new_text.id = node.id
+    if (node.checked == 1) {
+
+        alert("Hola mundo")
+        let parent_parent_node = nodeParent.parentNode
+        console.log(parent_parent_node)
+        console.log(nodeParent)
+        parent_parent_node.insertBefore(newDiv, nodeParent)
+    } else {
+        alert("No hola mundo")
+    }
+}

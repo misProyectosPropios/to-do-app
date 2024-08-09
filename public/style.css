@@ -146,8 +146,7 @@ body {
 }
 
   textarea {
-    padding: 0;
-    padding: 0 5px;;
+    padding: 0 5px;
     resize: none;
     height: 5%;
     width: 90%; max-width: 90%;
@@ -201,7 +200,7 @@ body {
     border-radius: 50%;
     background: transparent;
     color: #1da1f2;
-    font: inherit;
+    font: 15px;
     text-indent: 100%;
     cursor: pointer;
     
@@ -259,4 +258,11 @@ body {
 }
 .inv:hover {
   background-color: var(--invisible);
+}
+
+input[type='text'] {
+  background-color: red;
+  width: 85%; max-width: 85%;
+  padding: 0 5px;
+  margin: 0;
 }

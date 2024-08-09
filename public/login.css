@@ -1,8 +1,19 @@
 /* VARIABLES */
 
 :root {
-    --bacground-color: rgb(145, 143, 155);
+    --background-color: rgb(145, 143, 155);
+    --margin-input: 30px;
+    --background-form: rgb(140, 132, 179);
+    --border-radius: 10px;
+    --background-checkbox: rgba(4, 11, 107, 0.5);
+    --background-input: rgba(197, 193, 253, 0.678);
+    --background-color-submit: rgba(70, 87, 247, 0.664);
 }
+
+::placeholder {
+    color: rgb(53, 53, 53);
+    opacity: 1; /* Firefox */
+  }
 
 * {
     box-sizing: border-box;
@@ -11,6 +22,132 @@
 }
 
 body {
-    background-color: var(--bacground-color);
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.gradient-border {
+    --border-width: 3px;
+    margin: 0 auto;
+    margin-top: 5vh;
+    position: relative;
+    width: 40vw;
+    height: 60vh;
+    font-family: Lato, sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: white;
+    
+    background: var(--background-container);
+    border-radius: var(--border-radius);
+  
+    &::after {
+      position: absolute;
+      content: "";
+      top: calc(-1 * var(--border-width));
+      left: calc(-1 * var(--border-width));
+      z-index: -1;
+      width: calc(100% + var(--border-width) * 2);
+      height: calc(100% + var(--border-width) * 2);
+      background: linear-gradient(
+        60deg,
+        hsl(224, 85%, 66%),
+        hsl(269, 85%, 66%),
+        hsl(314, 85%, 66%),
+        hsl(359, 85%, 66%),
+        hsl(44, 85%, 66%),
+        hsl(89, 85%, 66%),
+        hsl(134, 85%, 66%),
+        hsl(179, 85%, 66%)
+      );
+      background-size: 300% 300%;
+      background-position: 0 50%;
+      border-radius: 10px;
+      animation: moveGradient 4s alternate infinite;
+    }
+  }
+  
+  @keyframes moveGradient {
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .overflow-hidden {
+    height: 100%;
+    width: 100%;
+    
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+
+form {
+    padding: 0;
+    display: inline-block;
+    background-color: var(--background-form);
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form div input {
+    display: block;
+    margin: var(--margin-input) auto;
+    font-size: 0.6em;
+    line-height: 1.6;
+    width: 80%;
+    height: 40%;
+    background-color: var(--background-input);
+}
+
+form div {
+    height: inherit;
+    width: inherit;
+    display: grid;
+
+}
+
+.row {
+    width: 100%;
+    display: inline-block;
+}
+
+
+
+.password {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+}
+
+.password input {
+    display: inline;
+    width: 80%;
+}
+
+
+.password input[type="checkbox"] {
+    width: 5%;
+    accent-color: var(--background-checkbox);
+}
+
+
+
+form input[type="submit"] {
+    width: 50%;
+    height: 3em;
+    margin: var(--margin-input) auto
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--background-color-submit);
 }
 

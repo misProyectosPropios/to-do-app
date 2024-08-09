@@ -106,9 +106,10 @@ function create_inside_div(json) {
 	})
 	for(let i = 0; i < id_list.length; i++) {
 		res += "<div class='row'>"
-		res += "<input type='checkbox'>"
+		res += "<input type='checkbox' onchange=change_state(this)>  "
+		//res += "<input type='text' class='textarea' onchange=updateDatabase(this.id) id=\"" + id_list[i][0] +"\" value=" + json[id_list[i][1]].todo+"/>"
 		res += "<textarea class='textarea' rows=1  onchange=updateDatabase(this.id) id=\"" + id_list[i][0] +"\">"
-		//res += "<textarea name='textarea' class='textarea' rows=1  id=\"" + id_list[i][0] +"\">"
+
 		res += json[id_list[i][1]].todo
 		res += "</textarea>"
 		res += "<button class='close' onClick='delete_todo(this)'/>"

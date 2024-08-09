@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../login.js"></script>
+    <link rel="stylesheet" type="text/css" href="../login.css">
     <title>Document</title>
 </head>
 <body>
-    <form action="/register" method="post">
-        <input name="username" type="text" placeholder="username"/>
-        <input name="password" type="password" placeholder="password"/>
-        <input type="submit" value="register">
-    </form>
+    <div class="gradient-border">
+        <div class="overflow-hidden">
+            <form action="/register" method="post">
+                <div class="form-div">
+                    <div class="row">  
+                        <input name="username" type="text" placeholder="username"/>
+                    </div>
+                    <div class="row password"> 
+                        <input name="password child one" type="password" placeholder="password"/>
+                        <input type="checkbox" class="child three" onchange=show_hide_password(this)>
+                    </div>
+                    <div class="row"> 
+                        <input type="submit" value="register">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

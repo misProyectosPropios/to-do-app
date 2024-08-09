@@ -23,7 +23,7 @@ Router.post('/', (req, res) => {
   });
 
   Router.get('/', (req, res) => {
-    return res.sendFile(process.env.DIRECTION + "/views/login.html")
+    return res.sendFile(process.env.DIRECTION + "/views/sign-in.html")
   })
 
   module.exports = Router
