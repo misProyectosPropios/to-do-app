@@ -122,31 +122,62 @@ function create_new_todo_to_the_view(todo_text, id) {
 }
 
 function change_state(node) {
+    console.log(node)
     modify_state_text_area_decoration(node)
 }
 
 function modify_state_text_area_decoration(node) {
     let nodeParent = node.parentNode
     let textarea = nodeParent.children.item(1)
-    let new_text = document.createElement("p")
-    new_text.innerHTML = textarea.value
-
+    let id = textarea.id
     let newDiv = document.createElement('div')
     newDiv.className = 'row'
 
-    newDiv.appendChild(node)
-    newDiv.appendChild(new_text)
-
-    console.log(textarea.value)
+    let newButton = document.createElement('button')  //res += "<button class='close' onClick='delete_todo(this)'/>"
+    newButton.className='close'
+    newButton.setAttribute("onclick", "delete_todo(this)");
     //new_text.id = node.id
+    let parent_parent_node = nodeParent.parentNode
     if (node.checked == 1) {
+        
+        
+        let new_text = document.createElement("p")
+        new_text.innerHTML = textarea.value
+        new_text.setAttribute('id', '-1')
+        new_text.classList.add('textarea', "line")
 
-        alert("Hola mundo")
-        let parent_parent_node = nodeParent.parentNode
-        console.log(parent_parent_node)
-        console.log(nodeParent)
+        newDiv.appendChild(node)
+        newDiv.appendChild(new_text)
+        newDiv.appendChild(newButton)
+        
         parent_parent_node.insertBefore(newDiv, nodeParent)
+        parent_parent_node.removeChild(nodeParent)
+        let text_p = document.getElementById('-1')
+        text_p.setAttribute('id', id)
     } else {
-        alert("No hola mundo")
+        
+        let new_text = document.createElement("textarea")
+        new_text.innerHTML = textarea.innerHTML
+        console.log("EL textarea es: ")
+        console.log(textarea)
+        new_text.setAttribute('id', '-1')
+        new_text.classList.add('textarea')
+        new_text.setAttribute("rows", '1')
+        new_text.setAttribute('onchange','updateDatabase(this.id)')
+
+        newDiv.appendChild(node)
+        console.log(node)
+        newDiv.appendChild(new_text)
+        newDiv.appendChild(newButton)
+
+        parent_parent_node.insertBefore(newDiv, nodeParent)
+        parent_parent_node.removeChild(nodeParent)
+
+        let text_p = document.getElementById('-1')
+        text_p.setAttribute('id', id)
+        
     }
 }
+
+
+let elementos = document.getElementsByTagName("textarea")

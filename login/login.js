@@ -22,6 +22,8 @@ Router.post('/', (req, res) => {
       console.log("No hubo ningún error")
       if (req.session) {
         console.log("Comparando las contraseñas")
+        console.log(row["password_hash"])
+        console.log(password)
         let is_correct_password = compare_passwords(password, row['password_hash'])
         if (is_correct_password) {
           req.session.loggedin = true;

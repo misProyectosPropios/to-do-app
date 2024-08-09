@@ -8,7 +8,8 @@
     --background-textarea-new-todo: rgba(119, 113, 151, 0.40);
     --background-button: rgba(13, 5, 54, 0.5);
     --invisble: rgba(0,0,0,0);
-
+    --font-size: 14px;
+    --text-line-through: rgb(44, 44, 44);
 }
 
 * {
@@ -58,11 +59,8 @@ body {
     position: relative;
     width: 40vw;
     height: 80vh;
-    font-family: Lato, sans-serif;
-    font-size: 2rem;
     text-transform: uppercase;
-    color: white;
-    
+    font-size: var(--font-size);
     background: var(--background-container);
     border-radius: var(--border-radius);
   
@@ -150,6 +148,7 @@ body {
     resize: none;
     height: 5%;
     width: 90%; max-width: 90%;
+    font-size: var(--font-size);
     border: none;
     outline: none;
     white-space: nowrap;
@@ -157,6 +156,30 @@ body {
     border-radius: var(--border-radius);
     overflow-y: hidden;
     overflow-x: auto;
+  }
+
+  .textarea {
+    width: 90%; max-width: 90%;
+    height: 5%;
+    padding: 1px 5px;
+    background-color: var(--background-textarea);
+    border-radius: var(--border-radius);
+    border: none;
+    outline: none;
+    overflow-y: hidden;
+    overflow-x: auto;
+    letter-spacing: normal;
+    
+  }
+  p {
+    text-transform: none;
+    color: var(--text-line-through);
+    
+  }
+
+  .line {
+    text-decoration: line-through;
+    letter-spacing: 0.8px;
   }
 
   .textarea ::-webkit-scrollbar {
