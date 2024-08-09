@@ -175,7 +175,6 @@ function modify_state_text_area_decoration(node) {
 
         let text_p = document.getElementById('-1')
         text_p.setAttribute('id', id)
-        
     }
 }
 
