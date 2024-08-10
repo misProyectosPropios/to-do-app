@@ -1,10 +1,7 @@
 let id_to_write_information = 'container'
 
-let html_tag_add_todo = '<div class="row">                             \
-            <button class="add-button" onclick="alert("hola mundo")">+</button>                      \
-            <textarea class="new_todo" rows=1 onchange="create_new_todo(this.value)"/></textarea>     \
-            <div class="inv"></div>\
-    </div>'
+
+
 /* 
  * Calls the API and waits till the API returns a value for then return it
  * problem call_API (path: text, paremters: object) {
@@ -84,16 +81,36 @@ window.onload = (event) => {
 
 function add_button_to_create_new_todos() {
     let todos_container = document.getElementById(id_to_write_information)
+    let html_tag_add_todo = document.createElement('div')
+    let button = document.createElement('button')
+    let textarea = document.createElement('textarea')
+    let inv = document.createElement('div')
     
-    todos_container.innerHTML += html_tag_add_todo
+    html_tag_add_todo.className='row'
+    button.className = 'add-button'
+    button.setAttribute('onclick', 'alert("hola mundo")')
+    button.innerHTML = '+'
+    textarea.className='new_todo'
+    textarea.setAttribute('rows', '1')
+    textarea.setAttribute('onchange', 'create_new_todo(this.value)')
+    inv.className = 'inv'
+    
+    html_tag_add_todo.appendChild(button)
+    html_tag_add_todo.appendChild(textarea)
+    html_tag_add_todo.appendChild(inv)
+
+
+    html_tag_add_todo.children.item(1).innerHTML = ''
+    todos_container.appendChild(html_tag_add_todo)
 }
 
 async function create_new_todo(todo_text) {
     console.log(todo_text)
+    alert(todo_text)
     let todos_container = document.getElementById(id_to_write_information)
     let last_children = todos_container.children.item(todos_container.children.length - 1)
     todos_container.removeChild(last_children)
-    
+    alert("Se elimino al hijo")
     let user_name = getUsername()
     parameters = {
         "user_name": user_name,
@@ -103,21 +120,36 @@ async function create_new_todo(todo_text) {
     let id = await call_API("POST", "/API/create_todo", parameters)
 
     let html = create_new_todo_to_the_view(todo_text, id)
+    alert("Se agrego el otro")
     console.log(html)
-    todos_container.innerHTML +=  html
-    todos_container.innerHTML += html_tag_add_todo
+    todos_container.appendChild(html)
+    alert("Se agrego el nuevo todo")
+    add_button_to_create_new_todos()
     
 }
 
 function create_new_todo_to_the_view(todo_text, id) {
-    let res = ""
-    res += "<div class='row'>"
-	res += "<input type='checkbox'>"
-	res += "<textarea class='textarea' rows=1  onchange=updateDatabase(this.id) id=\"" + id +"\">"
-    res += todo_text
-	res += "</textarea>"
-	res += "<button class='close' onClick='delete_todo(this)'/>"
-	res += "</div>"
+    let res = document.createElement('div')
+    res.className = 'row'
+
+    let checkbox = document.createElement('input')
+    checkbox.setAttribute('type', 'checkbox')
+    checkbox.setAttribute('onchange', 'change_state(this)')
+
+    let textarea = document.createElement('textarea')
+    textarea.className = 'textarea'
+    textarea.setAttribute('rows', '1')
+    textarea.setAttribute('onchange', 'updateDatabase(this.id)')
+    textarea.setAttribute('id', id)
+    textarea.innerHTML = todo_text
+
+    let button =  document.createElement('button')
+    button.className = 'close'
+    button.setAttribute('onclick', 'delete_todo(this)')
+
+    res.appendChild(checkbox)
+    res.appendChild(textarea)
+    res.appendChild(button)
     return res
 }
 
@@ -177,6 +209,3 @@ function modify_state_text_area_decoration(node) {
         text_p.setAttribute('id', id)
     }
 }
-
-
-let elementos = document.getElementsByTagName("textarea")

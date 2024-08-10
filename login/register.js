@@ -10,8 +10,9 @@ const path = "/register"
 
 // Creates a new user, if it doesn't exists already
 Router.post('/', (req, res) => {
-    const user_name = req.body['user_name']
-    const password = req.body['password_hash'];
+    const user_name = req.body['username']
+    const password = req.body['password'];
+    console.log(user_name, password)
     const password_hash = hash_password(password)
     create_item(user_name, password_hash, (err, data) => {
       if(err) {
